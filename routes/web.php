@@ -58,7 +58,8 @@ Route::get('/', function () {
             //     return view('masterkontak');
             // });
             
-
+Route::post('/login/login', [AuthController::class, 'login'])->name('login.in');
+Route::post('/register/masuk', [AuthController::class, 'store'])->name('register.store');
 
 
 Route::middleware(['guest'])->group(function(){
