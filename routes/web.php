@@ -23,7 +23,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('sesi.login');
+    return redirect('/login');
 });
 
 // Route::get('/home', function () {
