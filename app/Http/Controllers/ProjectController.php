@@ -85,7 +85,7 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        Projek::find('id');
+        Projek::find($id);
         $siswas = Siswa::all();
         $projects = Projek::where('id',$id)->firstorfail();
         return view('projek.edit_project', compact('projects'), compact('siswas'));
