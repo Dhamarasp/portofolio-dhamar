@@ -23,7 +23,7 @@
                     style="
                         height: 220px;
                         width: 220px;
-                        background-image: url({{ asset('storage/'. $siswas->foto) }});
+                        background-image: url({{ asset('images/profil.png') }});
                         background-repeat: no-repeat;
                         background-size: cover;
                         background-position: center center;
@@ -78,7 +78,7 @@
                         <div class="col-md-6">
                             <div class="card shadow mb-4">
                                 <div class="card-body">
-                                    <img class="w-100" src="{{asset('storage/'. $projek->foto)}}" alt="">
+                                    <img class="w-100" src="{{asset('images/project.png')}}" alt="">
                                     <hr>
                                     <a href="/admin/masterproject">Baca selengkapnya..</a>
                                 </div>
