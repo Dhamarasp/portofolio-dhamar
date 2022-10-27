@@ -1,7 +1,6 @@
 @extends('admin.app')
 @section('title', "Dashboard")
 @section('konten-title', "Dashboard")
-    
 @section('konten')
 {{-- <div class="container-fluid">
 

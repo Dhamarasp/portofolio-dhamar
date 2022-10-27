@@ -56,7 +56,11 @@ class ProjectController extends Controller
             'foto.mimes' => 'Format Yang Diperbolehkan jpg, png, jpeg, svg',
         ]);
 
-        $validatedData['foto'] = $request->file('foto')->store('siswa-projects');
+        if ($request->file('foto') == null) {
+            $validatedData['foto'] = "default.jpg";
+        }else{
+            $validatedData['foto'] = $request->file('foto')->store('siswa-projects'); 
+        }
         
         Projek::create($validatedData);
         return redirect('/admin/masterproject')->with('success', 'Berhasil Menambahkan Data');
@@ -121,7 +125,6 @@ class ProjectController extends Controller
     
         $projects=Projek::where('id', $id)
             ->update($validatedData);
-
         
         return redirect('/admin/masterproject')->with('success', 'Berhasil Merubah Data');
     }
