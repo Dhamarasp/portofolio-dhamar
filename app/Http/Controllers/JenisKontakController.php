@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisKontak;
 use Illuminate\Http\Request;
 
 class JenisKontakController extends Controller
@@ -13,7 +14,8 @@ class JenisKontakController extends Controller
      */
     public function index()
     {
-        //
+        $item = JenisKontak::all();
+        return view('contact.tambah_jeniskontak', compact('item'));
     }
 
     /**
@@ -23,7 +25,7 @@ class JenisKontakController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +36,14 @@ class JenisKontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'jenis_kontak' => 'required'
+        ],[
+            'jenis_kontak.required' => 'Jenis Kontak Wajib diisi'
+        ]);
+
+        JenisKontak::create($validatedData);
+        return redirect('/admin/jeniskontak')->with('success', 'Berhasil Menambah Jenis Kontak');
     }
 
     /**
@@ -79,6 +88,8 @@ class JenisKontakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        JenisKontak::find($id)->delete();
+        
+        return redirect('/admin/jeniskontak')->with('success', 'Berhasil Menghapus Jenis Kontak');
     }
 }

@@ -43,13 +43,13 @@
                     <thead>
                         <tr class="text-center">
                             {{-- <th>NO</th> --}}
-                            <th>No</th>
-                            <th>Nisn</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Kelamin</th>
-                            <th>Email</th>
-                            <th>Aksi</th>
+                            <tr>No</tr>,
+                            <tr>Nisn</tr>,
+                            <tr>Nama</tr>,
+                            <tr>Alamat</tr>,
+                            <tr>Kelamin</tr>,
+                            <tr>Email</tr>,
+                            <tr>Aksi</tr>
                         </tr>
                     </tbody>
                     @foreach ($siswas as $siswa)

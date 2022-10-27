@@ -19,8 +19,6 @@ class Siswa extends Model
         'tentang',
     ];
 
-
-
     protected $table = 'siswa';
     protected $guarded=[];
 

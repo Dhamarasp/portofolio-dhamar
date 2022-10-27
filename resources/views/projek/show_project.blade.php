@@ -72,7 +72,4 @@
   </div>
   @endforeach
 </div>
-@else
-<h6 class="text-center">Siswa belum memiliki project satupun.</h6>
-<a href="{{ route('tambahproject', $siswa['id']) }}" class="text-center d-block">Ayo buat projek..</a>
 @endif

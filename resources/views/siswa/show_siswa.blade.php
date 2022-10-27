@@ -42,11 +42,14 @@
                 <div class="card-header py-1 d-flex flex-row align-items-center justify-content-center">
                     <h6 class="m-1 font-weight-bold text-primary ">Kontak</h6>
                 </div>
-                <div class="card-body m1">
-                    {{-- @foreach ($kontaks as $kontak)
-                    <a href="{{$kontak->deskripsi}}">{{$kontak->jeniskontak->jenis_kontak}}</a>
-                    <h5 class="font-weight-bold">{{$kontak->deskripsi}}</h5>
-                    @endforeach --}}
+                <div class="card-body m-1">
+                    @foreach ($kontaks as $kontak)
+                    <h5 class="font-weight-bold">
+                        <i class="fab fa-{{strtolower($kontak->jeniskontak->jenis_kontak)}}"></i>
+                    {{ $kontak->deskripsi }}
+                    </h5>
+                    <hr>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -75,8 +78,9 @@
                         <div class="col-md-6">
                             <div class="card shadow mb-4">
                                 <div class="card-body">
-                                    <img class="w-20" src="{{asset('storage/'. $projek->foto)}}" alt="">
-                                    <a href="">Baca selengkapnya..</a>
+                                    <img class="w-100" src="{{asset('storage/'. $projek->foto)}}" alt="">
+                                    <hr>
+                                    <a href="/admin/masterproject">Baca selengkapnya..</a>
                                 </div>
                             </div>
                         </div>

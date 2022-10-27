@@ -13,6 +13,7 @@ class JenisKontak extends Model
         'jenis_kontak',
     ];
     protected $table = 'jenis_kontak';
+    protected $guarded = [];
     
     public function kontak(){
         return $this->hasMany(Kontak::class, 'id_jenis');

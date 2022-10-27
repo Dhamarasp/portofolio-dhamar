@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisKontak;
 use Illuminate\Http\Request;
 use App\Models\Kontak;
 use App\Models\Siswa;
@@ -29,7 +30,8 @@ class KontakController extends Controller
     {
         $id_siswa = request()->query('siswa');
         $siswas = Siswa::find($id_siswa);
-        return view('contact.tambah_kontak', compact('siswas'));
+        $kontaks = JenisKontak::all();
+        return view('contact.tambah_kontak', compact('siswas','kontaks'));
     }
 
     /**
@@ -40,7 +42,14 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id_siswa' => 'required',
+            'id_jenis' => 'required',
+            'deskripsi' => 'required|max:255'
+        ]);
+        
+        Kontak::create($validatedData);
+        return redirect('/admin/masterkontak')->with('success', 'Berhasil Menambahkan Kontak');
     }
 
     /**
@@ -63,7 +72,7 @@ class KontakController extends Controller
      */
     public function edit($id)
     {
-        return view('edit_kontak');
+        //
     }
 
     /**
@@ -86,6 +95,6 @@ class KontakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kontak::find($id)->delete();
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProjekController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JenisKontakController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
     
         //Kontak
     Route::resource('/masterkontak', KontakController::class);
+    Route::resource('/jeniskontak', JenisKontakController::class);
     
     });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -1,46 +1,32 @@
-@extends('admin.app')
+{{-- @extends('admin.app')
 @section('title', "Show Kontak")
-@section('konten-title', "Show Kontak")
+@section('konten-title', "Show Kontak") --}}
 
-@section('konten')
+{{-- @section('konten') --}}
 
 @if (!$kontaks->isEmpty())
 <div class="row">
-    @foreach ($projeks as $projek)
-    <div class="col-md-12">
+    @foreach ($kontaks as $kontak)
+    <div class="col-md-4">
         <div class="card shadow mb-3 p-2">
-            <div class="card-body">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-md-7">
-                        <img src="{{ asset('storage/' . $projek->foto) }}" class="rounded w-100" alt="Foto Projek">
-                    </div>
-                    <div class="col-md-5">
-                        <h5 class="text-dark font-weight-bold">{{ $projek->nama_projek }}</h5>
-                        <p class="mt-3 mb-4 small">
-                            {{ $projek->deskripsi }}
-                        </p>
-                    </div>
-                </div>
+            <div class="card-body m-1">
+                <h5 class="font-weight-bold">
+                    <i class="fab fa-{{strtolower($kontak->jeniskontak->jenis_kontak)}}"></i>
+                {{ $kontak->deskripsi }}
+                </h5>
             </div>
             <div class="card-footer">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-md-6 text-left">
-                        <a href="{{route('masterproject.edit', $projek['id'])}}"
+                        <a href="{{route('masterkontak.edit', $kontak['id'])}}"
                             class="btn btn-circle btn-sm btn-primary"><i class="fas fa-edit"></i></a>
 
-                        <form method="POST" action="{{route('masterproject.destroy', $projek->id)}}"
+                        <form method="POST" action="{{route('masterkontak.destroy', $kontak->id)}}"
                             onclick="return confirm('Apakah anda yakin akan menghapus project ini?')" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-circle btn-sm btn-danger" type="submit"><i
                                     class="fas fa-trash"></i></button></form>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <small>
-                            <span class="text-muted">
-                                <b>Date : </b> {{ $projek->tanggal }}
-                            </span>
-                        </small>
                     </div>
                 </div>
             </div>
@@ -48,9 +34,6 @@
     </div>
     @endforeach
 </div>
-@else
-<h6 class="text-center">Siswa belum memiliki project satupun.</h6>
-<a href="{{ route('tambahproject', $siswa['id']) }}" class="text-center d-block">Ayo buat projek..</a>
 @endif
 
-@endsection
+{{-- @endsection --}}
