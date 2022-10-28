@@ -72,7 +72,9 @@ class KontakController extends Controller
      */
     public function edit($id)
     {
-        //
+        Kontak::find($id);
+        $kontaks = Kontak::where('id', $id)->firstorfail();
+        return view('contact.edit_kontak', compact('kontaks'));
     }
 
     /**
@@ -84,7 +86,14 @@ class KontakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'deskripsi' => 'required'
+        ]);
+
+        Kontak::where('id', $id)
+        ->update($validatedData);
+
+        return redirect('admin/masterkontak')->with('success', 'Berhasil Mengubah Kontak');
     }
 
     /**
@@ -96,5 +105,6 @@ class KontakController extends Controller
     public function destroy($id)
     {
         Kontak::find($id)->delete();
+        return redirect('/admin/masterkontak')->with('success', 'Berhasil Menghapus Kontak');
     }
 }

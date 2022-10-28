@@ -22,16 +22,25 @@
 
 <div class="card shadow jutify">
     <div class="card-body">
+        <div class="form-group row">
+            <label for="jenis_kontak" class="col-sm-3 col-form-label">Jenis Kontak Saat Ini : </label>
+            <div class="col-sm-5">
+                @foreach ($item as $item)
+                <form method="POST" action="{{ route('jeniskontak.destroy', $item->id) }}" onclick="return confirm('Apakah Anda Yakin Akan Menghapus Jenis Kontak {{ $item->jenis_kontak }} ?')" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">{{ $item->jenis_kontak }}</span>
+                </button>
+                </form>
+                @endforeach
+            </div>
+        </div>
         <form method="POST" enctype="multipart/form-data" action="{{route('jeniskontak.store')}}">
             @csrf
-            <div class="form-group row">
-                <label for="jenis_kontak" class="col-sm-3 col-form-label">Jenis Kontak Saat Ini : </label>
-                <div class="col-sm-5">
-                    @foreach ($item as $item)
-                    <td>{{ $item->jenis_kontak }},</td>
-                    @endforeach
-                </div>
-            </div>
             <div class="form-group row">
                 <label for="jenis_kontak" class="col-sm-3 col-form-label">Tambah Jenis Kontak</label>
                 <div class="col-sm-5">
