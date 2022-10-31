@@ -24,7 +24,7 @@ use App\Http\Controllers\JenisKontakController;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return view('home');
 });
 
 // Route::get('/home', function () {
@@ -89,7 +89,6 @@ Route::middleware(['auth'])->group(function () {
     });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-            
 
 
 

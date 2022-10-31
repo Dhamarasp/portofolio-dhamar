@@ -53,6 +53,9 @@
             <li class="nav-item">
               <a class="nav-link @if(Request::is('me/contact')) active @endif"  href="/me/contact">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link @if(Request::is('me/contact')) active @endif"  href="{{ route('login') }}"><b>Login</b></a>
+            </li>
           </ul>
         </div>
       </div>

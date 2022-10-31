@@ -25,7 +25,7 @@ class SiswaController extends Controller
         } else {
             $siswas = Siswa::orderBy('id')->paginate($jumlahbaris);
         }
-        return view('admin.mastersiswa')->with('siswas',$siswas);
+        return view('admin.mastersiswa', compact('siswas'));
     }
 
     /**
