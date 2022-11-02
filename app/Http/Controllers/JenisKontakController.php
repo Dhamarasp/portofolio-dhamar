@@ -37,9 +37,10 @@ class JenisKontakController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'jenis_kontak' => 'required'
+            'jenis_kontak' => 'required'|'max:255'
         ],[
-            'jenis_kontak.required' => 'Jenis Kontak Wajib diisi'
+            'jenis_kontak.required' => 'Jenis Kontak Wajib diisi',
+            'jenis_kontak.max' => 'Maksimal 255 Huruf'
         ]);
 
         JenisKontak::create($validatedData);
