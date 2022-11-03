@@ -78,7 +78,7 @@
                         <div class="col-md-6">
                             <div class="card shadow mb-4">
                                 <div class="card-body">
-                                    <img class="w-100" src="{{asset('images/project.webp')}}" alt="">
+                                    <img class="w-100" src="{{asset('images/projek.webp')}}" alt="">
                                     <hr>
                                     <a href="/admin/masterproject">Baca selengkapnya..</a>
                                 </div>
