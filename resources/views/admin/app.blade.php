@@ -8,17 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Custom f onts for this template-->
-    <link href="{{ asset ('template/vendor/fontawesome-free/css/all.min.css')}}"rel="stylesheet" type="text/css">
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset ('template/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href= {{ asset ('template/css/sb-admin-2.min.css')}} rel="stylesheet">
+    <link href={{ asset ('template/css/sb-admin-2.min.css')}} rel="stylesheet">
 
     <title>SB Admin 2 - @yield('title')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 
 <body id="page-top">
@@ -90,15 +90,14 @@
 </body>
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src= {{ asset ('template/vendor/jquery/jquery.min.js')}}></script>
-    <script src= {{ asset ('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}></script>
+<!-- Bootstrap core JavaScript-->
+<script src={{ asset ('template/vendor/jquery/jquery.min.js')}}></script>
+<script src={{ asset ('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src={{ asset ('template/vendor/jquery-easing/jquery.easing.min.js')}}></script>
+<!-- Core plugin JavaScript-->
+<script src={{ asset ('template/vendor/jquery-easing/jquery.easing.min.js')}}></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src= {{ asset ('template/js/sb-admin-2.min.js')}}></script>
+<!-- Custom scripts for all pages-->
+<script src={{ asset ('template/js/sb-admin-2.min.js')}}></script>
 
 </html>
-
