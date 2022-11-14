@@ -23,9 +23,7 @@ use App\Http\Controllers\JenisKontakController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('beranda');
 
 // Route::get('/home', function () {
 //     return view('home');
