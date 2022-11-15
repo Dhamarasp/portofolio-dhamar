@@ -42,7 +42,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link @if(Request::is('me/home')) active @endif" href="/me/home">Home</a>
+              <a class="nav-link @if(Request::is('me/home', '/')) active @endif" href="/me/home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link @if(Request::is('me/about')) active @endif" href="/me/about">About</a>
@@ -52,9 +52,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link @if(Request::is('me/contact')) active @endif"  href="/me/contact">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link @if(Request::is('me/contact')) active @endif"  href="{{ route('login') }}"><b>Login</b></a>
             </li>
           </ul>
         </div>
