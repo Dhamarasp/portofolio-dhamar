@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dhamar - @yield('title')</title>
+    <title>SB Admin 2 - @yield('title')</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href={{ asset('template/vendor/fontawesome-free/css/all.min.css') }}  type="text/css">
