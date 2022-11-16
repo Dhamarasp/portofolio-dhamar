@@ -21,7 +21,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <li class="nav-item @if(Request::is('admin/mastersiswa', 'admin/mastersiswa/create', 'admin/mastersiswa/')) active @endif">
+        <li class="nav-item @if(Request::is('admin/mastersiswa*')) active @endif">
             <a class="nav-link" href="/admin/mastersiswa">
                 <i class="fas fa-fw fa fa-user"></i>
                 <span>Master Siswa</span>
@@ -31,7 +31,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <li class="nav-item @if(Request::is('admin/masterproject')) active @endif">
+        <li class="nav-item @if(Request::is('admin/masterproject*')) active @endif">
             <a class="nav-link" href="/admin/masterproject">
                 <i class="fas fa-fw fa fa-briefcase"></i>
                 <span>Master Project</span>
@@ -41,7 +41,7 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <li class="nav-item @if(Request::is('admin/masterkontak','admin/jeniskontak')) active @endif">
+        <li class="nav-item @if(Request::is('admin/masterkontak*', 'admin/jeniskontak*')) active @endif">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa fa-phone-alt"></i>
