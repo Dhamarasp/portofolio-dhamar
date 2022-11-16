@@ -72,7 +72,7 @@ class SiswaController extends Controller
             'nama.max'              => 'Nama Maksimal 100 Huruf',
             'alamat.required'       => 'Alamat Wajib Diisi',
             'alamat.max'            => 'Alamat Maksimal 100 Huruf',
-            'email.required'        =>'Email Wajib Diisi',
+            'email.required'        => 'Email Wajib Diisi',
             'email.email'           => 'Email Contoh example@gmail.com',
             'foto.image'            => 'Foto Harus Berupa Gambar',
             'foto.mimes'            => 'Format Yang Diperbolehkan jpg, png, jpeg, svg',
@@ -80,12 +80,21 @@ class SiswaController extends Controller
             'tentang.max'           => 'Maksimal 255 Hurud',
         ]);
 
-        if ($request->file('foto') == null) {
-            $validatedData['foto'] = "default.jpg";
-        }else{
-            $validatedData['foto'] = $request->file('foto')->store('siswa-images'); 
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $foto = time() . "_" . $file->getClientOriginalName();
+            $save_db_foto = 'mastersiswa/' . $foto;
+
+            $dir = public_path('images/admin/mastersiswa');
+            if (!file_exists($dir)) mkdir($dir); 
+
+            $file->move($dir, $foto);
+        } else {
+            $save_db_foto = 'default.webp';
         }
 
+        $validatedData['foto'] = $save_db_foto;
+        
         Siswa::create($validatedData);
         return redirect('/admin/mastersiswa')->with('success', 'Berhasil Menambahkan Data!');
     }
@@ -121,7 +130,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Siswa $mastersiswa)
     {
         // $messages = [
         //     'required' => ':attribute tidak boleh kosong!',
@@ -157,17 +166,26 @@ class SiswaController extends Controller
             'tentang.max'           => 'Maksimal 255 Hurud',
         ]);
 
-        if($request->file('foto')){
-            if($request->oldFoto){
-                Storage::delete($request->oldFoto);
+        if ($request->file('foto')) {
+            if ($mastersiswa->foto != 'default.webp') {
+                $old_foto = public_path('images/admin/' . $mastersiswa->foto);
+                if(file_exists($old_foto)) unlink($old_foto);
             }
-            $validatedData['foto'] = $request->file('foto')->store('siswa-images'); 
+
+            $file = $request->file('foto');
+            $foto = time(). "_" . $file->getClientOriginalName();
+            $save_db_foto = 'mastersiswa/' .$foto;
+
+            $dir = public_path('images/admin/mastersiswa');
+            $file->move($dir, $foto);
+
+            $validatedData['foto'] = $save_db_foto;
+
         }
 
-        $siswas=Siswa::where('id', $id)
-            ->update($validatedData);
+        $mastersiswa->update($validatedData);
 
-        $route = ($request->page == "index") ? redirect()->route('mastersiswa.index') : redirect()->route('mastersiswa.show', $id); 
+        $route = ($request->page == "index") ? redirect()->route('mastersiswa.index') : redirect()->route('mastersiswa.show', $mastersiswa->id); 
 
         return $route->with('success', 'Berhasil Merubah Data !');
     }
@@ -180,10 +198,22 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {   
-        $siswas=Siswa::where('id',$id)->firstorfail();
-        if($siswas->foto){
-            Storage::delete($siswas->foto);
+        $siswas = Siswa::where('id',$id)->firstorfail();
+        $projeks = $siswas->projeks;
+        if ($projeks->count() > 0) {
+            foreach ($projeks as $item) {
+                if ($item->foto != 'projek.webp') {
+                    $old_foto = public_path('images/admin/' .$item->foto);
+                    if (file_exists($old_foto)) unlink($old_foto);
+                }
+            }
         }
+
+        if($siswas->foto !='default.webp'){
+            $old_foto = public_path('images/admin/' . $siswas->foto);
+            if(file_exists($old_foto)) unlink($old_foto);
+        }
+
         $siswas = Siswa::find($id)
                 ->delete();
 

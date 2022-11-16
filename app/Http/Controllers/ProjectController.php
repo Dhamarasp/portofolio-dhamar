@@ -56,11 +56,20 @@ class ProjectController extends Controller
             'foto.mimes' => 'Format Yang Diperbolehkan jpg, png, jpeg, svg',
         ]);
 
-        if ($request->file('foto') == null) {
-            $validatedData['foto'] = "default.jpg";
-        }else{
-            $validatedData['foto'] = $request->file('foto')->store('siswa-projects'); 
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $foto = time() . "_" . $file->getClientOriginalName();
+            $save_db_foto = 'masterproject/' . $foto;
+
+            $dir = public_path('images/admin/masterproject');
+            if (!file_exists($dir)) mkdir($dir); 
+
+            $file->move($dir, $foto);
+        } else {
+            $save_db_foto = 'projek.webp';
         }
+
+        $validatedData['foto'] = $save_db_foto;
         
         Projek::create($validatedData);
         return redirect('/admin/masterproject')->with('success', 'Berhasil Menambahkan Data');
@@ -98,7 +107,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Projek $masterproject)
     {
 
         $validatedData = $request->validate([
@@ -116,15 +125,24 @@ class ProjectController extends Controller
             'foto.mimes' => 'Format Yang Diperbolehkan jpg, png, jpeg, svg',
         ]);
     
-        if($request->file('foto')){
-            if($request->oldFoto){
-                Storage::delete($request->oldFoto);
+        if ($request->file('foto')) {
+            if ($masterproject->foto != 'projek.webp') {
+                $old_foto = public_path('images/admin/' . $masterproject->foto);
+                if(file_exists($old_foto)) unlink($old_foto);
             }
-            $validatedData['foto'] = $request->file('foto')->store('siswa-projects'); 
+
+            $file = $request->file('foto');
+            $foto = time(). "_" . $file->getClientOriginalName();
+            $save_db_foto = 'masterproject/' .$foto;
+
+            $dir = public_path('images/admin/masterproject');
+            $file->move($dir, $foto);
+
+            $validatedData['foto'] = $save_db_foto;
+
         }
     
-        $projects=Projek::where('id', $id)
-            ->update($validatedData);
+        $masterproject->update($validatedData);
         
         return redirect('/admin/masterproject')->with('success', 'Berhasil Merubah Data');
     }
@@ -138,11 +156,14 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $projects = Projek::where('id', $id)->firstorfail();
-        if ($projects->foto) {
-            Storage::delete($projects->foto);
+        if($projects->foto !='projek.webp'){
+            $old_foto = public_path('images/admin/' . $projects->foto);
+            if(file_exists($old_foto)) unlink($old_foto);
         }
+
         $projects=Projek::find($id)
             ->delete();
+            
         return redirect('/admin/masterproject')->with('error', 'Berhasil Menghapus Data !');
     }
 }
