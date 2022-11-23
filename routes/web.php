@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function(){
     
     //Tanpa resource
-    Route::get('/dashboard',[DashboardController::class,'index']);
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
         //Siswa Resource
     Route::resource('/mastersiswa', SiswaController::class);

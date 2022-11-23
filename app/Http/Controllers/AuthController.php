@@ -69,7 +69,7 @@ class AuthController extends Controller
 
             Auth::login($user, $remember);
 
-            return redirect()->route('mastersiswa.index')
+            return redirect()->route('dashboard')
             
             ->with('success', 'Berhasil login!');
         }else{
